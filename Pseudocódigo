@@ -1,0 +1,16 @@
+from threading import Thread, Lock
+import time, random
+
+mapa_lock = Lock()
+
+def mover_jugador(jugador):
+    while not juego_terminado:
+        with mapa_lock:
+            actualizar_posicion(jugador)
+        time.sleep(0.2)
+
+def enemigo_patruya(enemigo):
+    while not juego_terminado:
+        with mapa_lock:
+            moverse_aleatoriamente(enemigo)
+        time.sleep(0.5)
