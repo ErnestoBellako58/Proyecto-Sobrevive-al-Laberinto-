@@ -1,16 +1,78 @@
-from threading import Thread, Lock
-import time, random
+Inicio
 
-mapa_lock = Lock()
+    // Registro del jugador
+    Mostrar "Ingrese el nombre de usuario"
+    Leer nombre_usuario
 
-def mover_jugador(jugador):
-    while not juego_terminado:
-        with mapa_lock:
-            actualizar_posicion(jugador)
-        time.sleep(0.2)
+    Mostrar "Seleccione su clase"
+    Leer clase
+    Asignar equipo basado en la clase
 
-def enemigo_patruya(enemigo):
-    while not juego_terminado:
-        with mapa_lock:
-            moverse_aleatoriamente(enemigo)
-        time.sleep(0.5)
+    Mostrar "Seleccione sus estadísticas"
+    Leer estadisticas
+
+    // Elección de host o ingreso a sala
+    Mostrar "¿Quieres ser el host de la partida? (Sí/No)"
+    Leer opcion_host
+
+    Si opcion_host == "Sí" Entonces
+        Crear sala
+        Generar id_lobby
+        Agregar nombre_usuario a id_jugadores
+        Mostrar "Esperando jugadores..."
+    Sino
+        Mostrar "Ingrese ID de la sala"
+        Leer id_sala
+        Unirse a id_sala existente
+    FinSi
+
+    // Configuración del mapa por el host
+    Si es_host Entonces
+        Mostrar "Seleccione las especificaciones del mapa"
+        Leer especificaciones_mapa
+    FinSi
+
+    // Generación del laberinto y elementos
+    Generar laberinto aleatorio
+    Generar 4 jugadores en posiciones aleatorias dentro del laberinto
+    Generar enemigos
+    Generar objetos en el laberinto
+    Generar salida secreta
+
+    // Inicio del juego
+    Mostrar "¡El juego ha comenzado!"
+    Iniciar contador de 10 minutos
+
+    Mientras tiempo_restante > 0 y ningún jugador ha escapado Hacer
+        Para cada jugador Hacer
+            Permitir movimiento según controles y restricciones del laberinto
+            Si jugador encuentra enemigo Entonces
+                Resolver enfrentamiento
+            FinSi
+            Si jugador encuentra objeto Entonces
+                Aplicar efecto del objeto
+            FinSi
+            Si jugador encuentra salida secreta Entonces
+                Mostrar "¡Has escapado del laberinto!"
+                Terminar partida
+            FinSi
+        FinPara
+
+        Actualizar posiciones de enemigos y jugadores
+        Disminuir tiempo_restante
+
+    FinMientras
+
+    // Fin del juego
+    Determinar ganador (quien escapó o quien estuvo más cerca de la salida)
+    Mostrar "El ganador es: " ganador
+
+    Mostrar "¿Quieres jugar otra vez? (Sí/No)"
+    Leer repetir_partida
+    Si repetir_partida == "Sí" Entonces
+        Reiniciar juego
+    Sino
+        Salir
+    FinSi
+
+Fin
