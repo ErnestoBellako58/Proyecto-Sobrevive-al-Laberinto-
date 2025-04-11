@@ -1,0 +1,15 @@
+Instrucciones de Ejecución
+
+1. Clona este repositorio:
+
+git clone https://github.com/tuusuario/sobrevive-laberinto.git
+cd sobrevive-laberinto
+
+2. Instala pygame si deseas gráficos:
+
+pip install pygame
+
+3. Ejecuta el archivo principal:
+
+
+python main.py
